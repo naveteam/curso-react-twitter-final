@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 
 const styles = {
@@ -23,12 +23,22 @@ const styles = {
     }
 }
 
-export default props => (
-    <header style={styles.header}>
-        <div>
-            <NavLink activeStyle={styles.active} to="/timeline" style={styles.button}>Timeline</NavLink>
-            <NavLink activeStyle={styles.active} to="/perfil" style={styles.button}>Perfil</NavLink>
-        </div>
-        <button style={styles.button}>Sair</button>
-    </header>
-)
+export default class Header extends Component{
+    logout(e) {
+        e.preventDefault();
+        localStorage.clear();
+        this.props.history.replace('/');
+    }
+
+    render() {
+        return (
+            <header style={styles.header}>
+                <div>
+                    <NavLink activeStyle={styles.active} to="/timeline" style={styles.button}>Timeline</NavLink>
+                    <NavLink activeStyle={styles.active} to="/perfil" style={styles.button}>Perfil</NavLink>
+                </div>
+                <button onClick={this.logout.bind(this)} style={styles.button}>Sair</button>
+            </header>
+        )
+    }
+}
