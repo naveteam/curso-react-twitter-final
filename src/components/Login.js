@@ -38,6 +38,13 @@ export default class Login extends Component {
         }
     }
 
+    componentWillMount() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            this.props.history.push('/timeline');  
+        }    
+    }
+
     stateOnChange(key, e) {
         this.setState({
             [key]: e.target.value,
