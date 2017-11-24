@@ -97,7 +97,17 @@ export default class Profile extends Component {
                         <input value={this.state.user.password} onChange={this.handleChange.bind(this, 'password')} type="password" disabled={this.state.disabledPassword}/>
                         <button onClick={this.switchPassword.bind(this)}>Trocar senha</button>
                     </label>
-                    <button style={styles.submit} type="submit">Salvar</button>
+                    <button 
+                        disabled={
+                            !this.state.user.name ||
+                            !this.state.user.email ||
+                            !this.state.user.password
+                        }
+                        style={styles.submit} 
+                        type="submit"
+                    >
+                        Salvar
+                    </button>
                 </form>
                 {this.state.message && 
                     <div style={styles.message}>

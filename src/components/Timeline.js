@@ -83,14 +83,14 @@ export default class Timeline extends Component {
             <div style={styles.timeline}>
                 <form onSubmit={this.handleSubmit.bind(this)} style={styles.form}>
                     <textarea
-                        value={this.state.value}
+                        value={this.state.tweet}
                         onChange={this.handleChange.bind(this)}
                         style={styles.newTweet}
                         name="newTweet"
                         rows="10"
                         placeholder="Escreva alguma coisa..."
                     />
-                    <button type="submit" style={styles.submit}>Tweet</button>
+                    <button disabled={!this.state.tweet} type="submit" style={styles.submit}>Tweet</button>
                 </form>
                 <button onClick={this.refresh.bind(this)} style={styles.refresh}>Atualizar</button>
                 <Tweets tweets={this.state.tweets}/>

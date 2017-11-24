@@ -81,7 +81,13 @@ export default class Login extends Component {
                             required
                         />
                     </label>
-                    <button style={styles.submit} type="submit">Entrar</button>
+                    <button 
+                        disabled={!this.state.email || !this.state.password} 
+                        style={styles.submit} 
+                        type="submit"
+                    >
+                        Entrar
+                    </button>
                     <Link style={styles.link} to="/cadastro">Cadastro</Link>
                 </form>
             </div>
