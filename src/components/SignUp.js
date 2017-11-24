@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import '../index.css';
+import { signUp } from '../services/auth';
 
 const styles = {
     form: {
@@ -32,7 +33,7 @@ export default class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            name: '',
             email: '',
             password: ''
         }
@@ -46,7 +47,9 @@ export default class SignUp extends Component {
 
     formSubmit(e) {
         e.preventDefault();
-        this.props.history.push('/');
+        signUp(this.state)
+            .then(res => this.props.history.push('/'))
+            .catch(error => console.log(error));
     }
 
     render() {
@@ -60,8 +63,8 @@ export default class SignUp extends Component {
                     <label htmlFor="name">
                         <span>Nome de usuário:</span>
                         <input 
-                            value={this.state.username} 
-                            onChange={this.stateOnChange.bind(this, 'username')} 
+                            value={this.state.name} 
+                            onChange={this.stateOnChange.bind(this, 'name')} 
                             type="text" placeholder="Demogorgon"
                             required
                         />

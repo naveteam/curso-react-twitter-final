@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tweets from './Tweets';
+import { createTweet, getTweets } from '../services/tweet';
 
 const styles = {
     timeline: {
@@ -40,20 +41,41 @@ export default class Timeline extends Component {
     constructor(props){
         super(props);
         this.state = {
-            tweet: ''
+            tweet: '',
+            tweets: [],
+            user: null
         }
+    }
+
+    async componentWillMount(){
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            const res = await getTweets();
+            this.setState({tweets: res.data, user})
+        } else {
+            this.props.history.replace('/');
+        }
+        
     }
 
     handleSubmit(e) {
         e.preventDefault();
+        createTweet({text: this.state.tweet, userId: this.state.user.id})
+            .then(res => {
+                const newState = [res.data].concat(this.state.tweets);
+                this.setState({tweets: newState, tweet: ''})
+            })
+            .catch(error => console.log(error))
     }
 
     handleChange(e) {
         this.setState({tweet: e.target.value})
     }
 
-    refresh() {
-        console.log('atualiza');
+    async refresh(e) {
+        e.preventDefault();
+        const res = await getTweets();
+        this.setState({tweets: res.data})
     }
 
     render() {
@@ -71,7 +93,7 @@ export default class Timeline extends Component {
                     <button type="submit" style={styles.submit}>Tweet</button>
                 </form>
                 <button onClick={this.refresh.bind(this)} style={styles.refresh}>Atualizar</button>
-                <Tweets tweets={[{username: 'teste', text: 'AEHOOOOOO'}]}/>
+                <Tweets tweets={this.state.tweets}/>
             </div>
         )
     }

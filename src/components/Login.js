@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import '../index.css';
+import { loginUser } from '../services/auth';
 
 const styles = {
     form: {
@@ -45,7 +46,12 @@ export default class Login extends Component {
 
     formSubmit(e) {
         e.preventDefault();
-        this.props.history.push('/timeline');
+        loginUser(this.state)
+            .then(res => {
+                localStorage.setItem('user', JSON.stringify(res.data));
+                this.props.history.push('/timeline');  
+            })
+            .catch(error => console.log(error))
     }
 
     render() {
