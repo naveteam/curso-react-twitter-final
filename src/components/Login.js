@@ -2,6 +2,32 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import '../index.css';
 
+const styles = {
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        backgroundColor: '#38435a',
+        padding: 20,
+        color: 'white',
+    },
+    center: {textAlign: 'center'},
+    submit: {
+        padding: '0.85rem',
+        border: 'none',
+        borderRadius: 0,
+        color: '#fff',
+        backgroundColor: '#ea454b',
+        cursor: 'pointer',
+        textDecoration: 'none'
+    },
+    link: {
+        marginTop: 15, 
+        color: '#fff', 
+        float: 'right'
+    }
+}
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -27,18 +53,9 @@ export default class Login extends Component {
             <div className="container">
                 <form 
                     onSubmit={this.formSubmit.bind(this)}
-                    style={
-                        {
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-around',
-                            backgroundColor: '#38435a',
-                            padding: 20,
-                            color: 'white'
-                        }
-                    }
+                    style={styles.form}
                 >
-                    <h2 style={{textAlign: 'center'}}>Entrar</h2>
+                    <h2 style={styles.center}>Entrar</h2>
                     <label htmlFor="name">
                         <span>Email:</span>
                         <input 
@@ -58,20 +75,8 @@ export default class Login extends Component {
                             required
                         />
                     </label>
-                    <button style={
-                            {
-                                padding: '0.85rem',
-                                border: 'none',
-                                borderRadius: 0,
-                                color: '#fff',
-                                backgroundColor: '#ea454b',
-                                cursor: 'pointer',
-                                textDecoration: 'none'
-                            }
-                        }
-                        type="submit"
-                    >Entrar</button>
-                    <Link style={{marginTop: 15, color: '#fff', float: 'right'}} to="/cadastro">Cadastro</Link>
+                    <button style={styles.submit} type="submit">Entrar</button>
+                    <Link style={styles.link} to="/cadastro">Cadastro</Link>
                 </form>
             </div>
         );

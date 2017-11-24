@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 const styles = {
     profile: {
-        padding: 20,
-        border: '1px solid #38435a'
+        alignSelf: 'left'
     },
     center: {
         textAlign: 'center'
@@ -49,7 +48,7 @@ export default class Profile extends Component {
                     <label htmlFor="">
                         Password
                         <input type="password" disabled={this.state.disabledPassword}/>
-                        <button onClick={this.switchPassword.bind(this)}>trocar senha</button>
+                        <button onClick={this.switchPassword.bind(this)}>Trocar senha</button>
                     </label>
                     <button style={styles.submit} type="submit">Salvar</button>
                 </form>

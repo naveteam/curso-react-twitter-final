@@ -1,5 +1,32 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import '../index.css';
+
+const styles = {
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        backgroundColor: '#38435a',
+        padding: 20,
+        color: 'white',
+    },
+    submit: {
+        padding: '0.85rem',
+        border: 'none',
+        borderRadius: 0,
+        color: '#fff',
+        backgroundColor: '#ea454b',
+        cursor: 'pointer',
+        textDecoration: 'none'
+    },
+    center: {textAlign: 'center'},
+    link: {
+        marginTop: 15, 
+        color: '#fff', 
+        float: 'right'
+    }
+}
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -27,18 +54,9 @@ export default class SignUp extends Component {
             <div className="container">
                 <form 
                     onSubmit={this.formSubmit.bind(this)}
-                    style={
-                        {
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-around',
-                            backgroundColor: '#38435a',
-                            padding: 20,
-                            color: 'white'
-                        }
-                    }
+                    style={styles.form}
                 >
-                    <h2 style={{textAlign: 'center'}}>Cadastro</h2>
+                    <h2 style={styles.center}>Cadastro</h2>
                     <label htmlFor="name">
                         <span>Nome de usuário:</span>
                         <input 
@@ -67,19 +85,8 @@ export default class SignUp extends Component {
                             required
                         />
                     </label>
-                    <button style={
-                            {
-                                padding: '0.85rem',
-                                border: 'none',
-                                borderRadius: 0,
-                                color: '#fff',
-                                backgroundColor: '#ea454b',
-                                cursor: 'pointer',
-                                textDecoration: 'none'
-                            }
-                        }
-                        type="submit"
-                    >Cadastrar</button>
+                    <button style={styles.submit} type="submit">Cadastrar</button>
+                    <Link style={styles.link} to="/">Login</Link>
                 </form>
             </div>
         )
