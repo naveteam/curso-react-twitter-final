@@ -55,7 +55,6 @@ export default class Timeline extends Component {
         } else {
             this.props.history.replace('/');
         }
-        
     }
 
     handleSubmit(e) {
