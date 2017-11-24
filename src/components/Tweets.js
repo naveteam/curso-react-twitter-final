@@ -17,7 +17,7 @@ const styles = {
 
 export default props => (
     <div style={styles.tweets}>
-        <h2 style={styles.center}>Tweets da sua linha do tempo</h2>
+        <h2 style={styles.center}>Linha do tempo</h2>
         {!props.tweets ? 
             <h4 style={styles.center}>Não há tweets para serem mostrados</h4>
             : props.tweets.map(tweet => <Tweet tweet={tweet}/>)
