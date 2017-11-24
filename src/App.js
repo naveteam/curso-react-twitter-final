@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import Routes from './components/Routes';
+import { Router } from 'react-router-dom'
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1 style={{textAlign: 'center'}}>Bem-vindo ao curso de react</h1>
+        <Router history={history}>
+          <Routes />
+        </Router>
       </div>
     );
   }
