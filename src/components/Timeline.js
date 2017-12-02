@@ -96,4 +96,4 @@ export default class Timeline extends Component {
             </div>
         )
     }
-}
+} 
