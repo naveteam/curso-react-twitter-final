@@ -51,7 +51,7 @@ export default class Login extends Component {
         });
     }
 
-    formSubmit(e) {
+    formSubmit = (e) => {
         e.preventDefault();
         loginUser(this.state)
             .then(res => {
@@ -65,7 +65,7 @@ export default class Login extends Component {
         return (
             <div className="container">
                 <form 
-                    onSubmit={this.formSubmit.bind(this)}
+                    onSubmit={this.formSubmit}
                     style={styles.form}
                 >
                     <h2 style={styles.center}>Entrar</h2>
@@ -74,7 +74,8 @@ export default class Login extends Component {
                         <input 
                             value={this.state.email} 
                             onChange={this.stateOnChange.bind(this, 'email')} 
-                            type="email" placeholder="stranger@things.com"
+                            type="email"
+                            placeholder="stranger@things.com"
                             required
                         />
                     </label>
@@ -85,6 +86,7 @@ export default class Login extends Component {
                             onChange={this.stateOnChange.bind(this, 'password')}
                             type="password"
                             placeholder="******"
+                            autoComplete="off"
                             required
                         />
                     </label>

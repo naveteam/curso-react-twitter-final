@@ -5,13 +5,14 @@ import Wrapper from './Wrapper';
 import Profile from './Profile';
 import Login from './Login';
 import SignUp from './SignUp';
+import '../index.css';
 
-export default props => (
+export default () => (
     <Switch>
         <Route exact path="/" component={Login}/>
-        <Route exact path="/cadastro" component={SignUp}/>
-        <Route exact path="/timeline" render={(props) => <Wrapper {...props}><Timeline /></Wrapper>}/>
-        <Route exact path="/perfil" render={(props) => <Wrapper {...props}><Profile /></Wrapper>}/>
+        <Route path="/cadastro" component={SignUp}/>
+        <Wrapper path="/timeline" component={Timeline}/>
+        <Wrapper path="/perfil" component={Profile}/>
         <Route component={Login}/>
     </Switch>
 )
