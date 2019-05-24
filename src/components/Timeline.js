@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Tweets from './Tweets'
 import { createTweet, getTweets } from '../services/tweet'
+import { fillTweets } from '../redux/modules/tweets'
 
 const styles = {
   timeline: {
@@ -37,7 +39,7 @@ const styles = {
   }
 }
 
-export default class Timeline extends Component {
+class Timeline extends Component {
   state = {
     tweet: '',
     tweets: [],
@@ -47,7 +49,7 @@ export default class Timeline extends Component {
 
   async componentDidMount () {
     const user = JSON.parse(localStorage.getItem('user'))
-    if (user) {
+    if (!user) {
       this.setState({ user })
       this.loadTweets()
     } else {
@@ -58,12 +60,13 @@ export default class Timeline extends Component {
   handleSubmit = async e => {
     e.preventDefault()
     const { tweet, user, tweets } = this.state
+    const { fillTweets } = this.props
     try {
       const res = await createTweet({ text: tweet, userId: user.id })
       this.setState({
-        tweets: [res.data, ...tweets],
         tweet: ''
       })
+      fillTweets([res.data, ...tweets])
     } catch (error) {
       console.log(error)
     }
@@ -74,11 +77,13 @@ export default class Timeline extends Component {
   }
 
   loadTweets = async () => {
+    const { fillTweets } = this.props
     this.setState({
       isLoading: true
     })
     const res = await getTweets()
-    this.setState({ tweets: res.data, isLoading: false })
+    fillTweets(res.data)
+    this.setState({ isLoading: false })
   }
 
   refresh = async () => {
@@ -86,7 +91,9 @@ export default class Timeline extends Component {
   }
 
   render () {
-    const { tweet, isLoading, tweets } = this.state
+    const { tweet, isLoading } = this.state
+    const { tweets } = this.props
+    console.log('tweets', tweets)
 
     return (
       <div style={styles.timeline}>
@@ -117,3 +124,10 @@ export default class Timeline extends Component {
     )
   }
 }
+
+export default connect(
+  state => ({
+    tweets: state.tweets.data
+  }),
+  { fillTweets }
+)(Timeline)
